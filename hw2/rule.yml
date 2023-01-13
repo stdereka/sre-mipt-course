@@ -1,0 +1,6 @@
+groups:
+  - name: example_rule
+    interval: 30s
+    rules:
+    - record: average_http_requests_per_minute_by_code
+      expr: sum by (code) (rate(prometheus_http_requests_total[1m]))
