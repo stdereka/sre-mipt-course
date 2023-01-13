@@ -5,5 +5,7 @@ services:
     image: ubuntu:focal
     ports:
       - "8080:8080"
+    volumes:
+      - ./:/mnt/sre
     stdin_open: true
     tty: true
