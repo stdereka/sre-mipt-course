@@ -1,0 +1,18 @@
+groups:
+  - name: SystemAlerts
+    interval: 1m
+    rules:
+      - alert: HighCPULoad
+        expr: avg by (instance) (100 - irate(node_cpu_seconds_total{mode="idle"}[1m]) * 100) > 90
+        for: 1m
+        labels:
+          severity: 'warning'
+        annotations:
+          summary: "CPU load is >90%"
+      - alert: HighRAMConsumption
+        expr: (1 - sum_over_time(node_memory_MemFree_bytes[1m]) / sum_over_time(node_memory_MemTotal_bytes[1m])) * 100 > 90
+        for: 1m
+        labels:
+          severity: 'warning'
+        annotations:
+          summary: "RAM consumption is >90%"
